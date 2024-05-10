@@ -8,6 +8,8 @@ var bicicletaController = require('../../controllers/api/castillobicicletaContro
 // Define la ruta GET '/' que llama al método 'bicicleta_list' del controlador 'bicicletaController'
 router.get('/', bicicletaController.bicicleta_list);
 // Define la ruta POST '/create' que llama al método 'bicicleta_create' del controlador 'bicicletaController'
+router.post('/:id/update',bicicletaController.bicicleta_update_post);
+
 router.post('/create', bicicletaController.bicicleta_create);
 // Define la ruta DELETE '/delete' que llama al método 'bicicleta_delete' del controlador 'bicicletaController'
 router.delete('/delete', bicicletaController.bicicleta_delete);

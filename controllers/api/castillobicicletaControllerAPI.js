@@ -25,6 +25,19 @@ exports.bicicleta_create = function(req, res){
     });
 }
 
+exports.bicicleta_update_post = function (req, res) {
+    let bici = Bicicleta.findById(req.params.id)
+    bici.id = req.body.id
+    bici.color = req.body.color
+    bici.modelo = req.body.modelo
+    bici.ubicacion = [req.body.lat, req.body.lng];
+    Bicicleta.removeById(bici.id);
+    Bicicleta.add(bici);
+    res.status(200).json({
+      bicicleta: bici
+    })
+  }
+
 // Función para eliminar una bicicleta (DELETE)
 exports.bicicleta_delete = function(req, res){
     // Elimina la bicicleta con el id especificado en los parámetros de la solicitud

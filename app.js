@@ -14,9 +14,18 @@ var indexRouter = require('./routes/castilloindex');
 var usersRouter = require('./routes/castillousers');
 var biciRouter = require('./routes/castillobicicletas');
 var biciAPIRouter = require('./routes/api/castillobicicletas-api-routes');
+var usuariosAPIRouter = require('./routes/api/castillousuarios');
 
 // Crea una aplicación express
 var app = express();
+
+var mongoose = require('mongoose');
+
+var mongoDB = 'mongodb://localhost:27017/red_bicicletas';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 // Configuración del motor de vistas
 app.set('views', path.join(__dirname, 'views'));
@@ -38,6 +47,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/bicicletas', biciRouter);
 app.use('/api/bicicletas', biciAPIRouter);
+app.use('/api/usuarios', usuariosAPIRouter);
 
 // Middleware para manejar errores 404 (recurso no encontrado)
 app.use(function(req, res, next) {
